@@ -61,15 +61,21 @@
         catalogItemTypes = itemTypesTask.Result;
     }
 
-    private string BrandUri(int? brandId) => Nav.GetUriWithQueryParameters(new Dictionary<string, object?>()
+    private string BrandUri(int? brandId)
     {
-        { "page", null },
-        { "brand", brandId },
-    });
+        var query = new List<string>();
+        if (brandId != null) query.Add($"brand={brandId}");
+        if (ItemTypeId != null) query.Add($"type={ItemTypeId}");
+        var relUrl = "/" + (query.Count > 0 ? "?" + string.Join("&", query) : "");
+        return relUrl;
+    }
 
-    private string TypeUri(int? typeId) => Nav.GetUriWithQueryParameters(new Dictionary<string, object?>()
+    private string TypeUri(int? typeId)
     {
-        { "page", null },
-        { "type", typeId },
-    });
+        var query = new List<string>();
+        if (BrandId != null) query.Add($"brand={BrandId}");
+        if (typeId != null) query.Add($"type={typeId}");
+        var relUrl = "/" + (query.Count > 0 ? "?" + string.Join("&", query) : "");
+        return relUrl;
+    }
 }
