@@ -3,9 +3,16 @@
 @inject CatalogService CatalogService
 @attribute [StreamRendering]
 
+
 <PageTitle>AdventureWorks</PageTitle>
 <SectionContent SectionName="page-header-title">Ready for a new adventure?</SectionContent>
 <SectionContent SectionName="page-header-subtitle">Start the season with the latest in clothing and equipment.</SectionContent>
+
+<div style="display:flex; justify-content:center; margin-bottom:1.5rem;">
+    <div style="background:#f6fff7; border-radius:16px; box-shadow:0 2px 8px #0001; padding:0.8rem 2.2rem; font-size:1.15em; color:#388e3c; font-weight:500; letter-spacing:0.01em;">
+        @greeting
+    </div>
+</div>
 
 <div class="catalog">
     <CatalogSearch BrandId="@BrandId" ItemTypeId="@ItemTypeId" />
@@ -27,7 +34,12 @@
             <div class="page-links">
                 @foreach (var pageIndex in GetVisiblePageIndexes(catalogResult))
                 {
-                    <NavLink ActiveClass="active-page" Match="@NavLinkMatch.All" href="@Nav.GetUriWithQueryParameter("page", pageIndex == 1 ? null : pageIndex)">@pageIndex</NavLink>
+                    var query = new List<string>();
+                    if (pageIndex != 1) query.Add($"page={pageIndex}");
+                    if (BrandId != null) query.Add($"brand={BrandId}");
+                    if (ItemTypeId != null) query.Add($"type={ItemTypeId}");
+                    var relUrl = "/" + (query.Count > 0 ? "?" + string.Join("&", query) : "");
+                    <a class="@(Page == pageIndex || (Page is null && pageIndex == 1) ? "active-page" : null)" href="@relUrl">@pageIndex</a>
                 }
             </div>
         </div>
@@ -36,6 +48,15 @@
 
 @code {
     const int PageSize = 9;
+    private static readonly string[] Greetings = new[]
+    {
+        "Willkommen im eShop!",
+        "Schön, dass Sie da sind!",
+        "Viel Spaß beim Stöbern!",
+        "Entdecken Sie unsere Angebote!",
+        "Heute schon ein Schnäppchen gemacht?"
+    };
+    private string greeting = Greetings[new System.Random().Next(Greetings.Length)];
 
     [SupplyParameterFromQuery]
     public int? Page { get; set; }
