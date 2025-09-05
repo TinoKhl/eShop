@@ -96,6 +96,7 @@ public class BasketService : IBasketService, IDisposable
         return customerBasket;
     }
 
+    // Removes and clears the entire basket
     public async Task ClearBasketAsync()
     {
         var authToken = await _identityService.GetAuthTokenAsync().ConfigureAwait(false);
@@ -109,12 +110,15 @@ public class BasketService : IBasketService, IDisposable
             .ConfigureAwait(false);
     }
 
+
+    // Removes a single item from the basket
     public void Dispose()
     {
         Dispose(true);
         GC.SuppressFinalize(this);
     }
 
+    // Lazy initialization of the gRPC client
     private BasketGrpcClient.Basket.BasketClient GetBasketClient()
     {
         if (_basketClient is not null)
