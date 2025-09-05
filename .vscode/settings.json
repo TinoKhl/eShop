@@ -1,5 +1,8 @@
 {
   "dotnet.defaultSolution": "eShop.Web.slnf",
   "github.copilot.nextEditSuggestions.enabled": true,
-  "github.copilot.nextEditSuggestions.fixes": true
+  "github.copilot.nextEditSuggestions.fixes": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [{
+    "text": "Bitte halte die Commit Messages humorvoll aber kurz und zutreffend"
+  }]
 }
