@@ -9,6 +9,34 @@ using pb = global::Google.Protobuf;
 using pbc = global::Google.Protobuf.Collections;
 using pbr = global::Google.Protobuf.Reflection;
 using scg = global::System.Collections.Generic;
+/// <summary>
+/// Contains reflection information and message types generated from the basket.proto file for the Basket gRPC service.
+/// </summary>
+///
+/// <remarks>
+/// This namespace provides the following message types for basket operations:
+/// <list type="bullet">
+///   <item>
+///     <description><see cref="GetBasketRequest"/>: Request message for retrieving a customer's basket.</description>
+///   </item>
+///   <item>
+///     <description><see cref="CustomerBasketResponse"/>: Response message containing the customer's basket items.</description>
+///   </item>
+///   <item>
+///     <description><see cref="BasketItem"/>: Represents an item in the basket, including product ID and quantity.</description>
+///   </item>
+///   <item>
+///     <description><see cref="UpdateBasketRequest"/>: Request message for updating the customer's basket with new items.</description>
+///   </item>
+///   <item>
+///     <description><see cref="DeleteBasketRequest"/>: Request message for deleting a customer's basket.</description>
+///   </item>
+///   <item>
+///     <description><see cref="DeleteBasketResponse"/>: Response message for confirming basket deletion.</description>
+///   </item>
+/// </list>
+/// The <c>BasketReflection</c> class provides access to the file descriptor and message descriptors for these types.
+/// </remarks>
 namespace eShop.ClientApp.BasketGrpcClient {
 
   /// <summary>Holder for reflection information generated from Services/Basket/Protos/basket.proto</summary>
